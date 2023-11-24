@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="LOGO.png">
+    <title>Colaborador - Acessar Meu Pagamento</title>
+</head>
+<body>
+    <img class="logo" src="LOGO.png" alt="VULPIX">
+    <div class="back-container">
+        <button class="back-button">VOLTAR</button>
+      </div>
+    <div class="recibo">
+        <div class="header">
+          <h1>Recibo de Salário</h1>
+          <select id="mesSelecionado">
+            <option value="janeiro">Janeiro</option>
+            <option value="fevereiro">Fevereiro</option>
+            <option value="marco">Março</option>
+            <option value="abril">Abril</option>
+            <option value="maio">Maio</option>
+            <option value="junho">Junho</option>
+            <option value="julho">Julho</option>
+            <option value="agosto">Agosto</option>
+            <option value="setembro">Setembro</option>
+            <option value="outubro">Outubro</option>
+            <option value="novembro">Novembro</option>
+            <option value="dezembro">Dezembro</option>
+          </select>
+        </div>
+    
+        <div class="info">
+          <p><strong>Nome:</strong> José Carlos Lorandi</p>
+          <p><strong>CPF:</strong> 123.456.789-00</p>
+          <p><strong>Cargo:</strong> Gerente de Projetos</p>
+        </div>
+    
+        <table>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor (R$)</th>
+          </tr>
+          <tr>
+            <td>Salário Base</td>
+            <td>30.000,00</td>
+          </tr>
+          <tr>
+            <td>INSS</td>
+            <td>876,97</td>
+          </tr>
+          <tr>
+            <td>IRRF</td>
+            <td>7.123,87</td>
+          </tr>
+          <tr>
+            <td class="total-label"><strong>Total</strong></td>
+            <td class="total">21.999,16</td>
+          </tr>
+        </table>
+    
+        <p class="observations"><strong>Observações:</strong> Este é um exemplo fictício de recibo de salário. Os valores são ilustrativos.</p>
+      </div>
+      <div class="frame">
+        <a href="Tela-Acessar_meu_pagamento/holerites" download="./holerites" onclick="baixarPDF()" class="btn_baixar">BAIXAR</a>
+    </div>
+
+    <script>
+      function baixarPDF() {
+    var mesSelecionado = document.getElementById("mesSelecionado").value;
+    if (mesSelecionado !== "") {
+        var nomeDoArquivo = "teste_" + mesSelecionado + ".pdf";
+        var urlDoPDF = "./holerites/" + nomeDoArquivo;
+
+        // Criar um link de download dinâmico
+        var linkDownload = document.createElement("a");
+        linkDownload.href = urlDoPDF;
+        linkDownload.download = nomeDoArquivo;
+
+        // Simular um clique no link para iniciar o download
+        linkDownload.click();
+    } else {
+        alert("Por favor, selecione um mês antes de baixar o PDF.");
+    }
+}
+    </script>
+</body>
+
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #EDEDED;
+  }
+  
+  .recibo {
+    font-family: 'Roboto', sans-serif;
+    width: 50%;
+    margin: 20px auto;
+    background-color: #ffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 12rem 0 0 29rem;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .info {
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .total-label {
+    font-weight: bold;
+  }
+  
+  .total {
+    font-weight: bold;
+    text-align: right;
+    color: #2196F3;
+  }
+  
+  .observations {
+    font-size: 14px;
+    color: #777;
+  }
+  .frame {
+    align-items: center;
+    width: 90%;
+    cursor: pointer;
+    margin: 1rem 0 0 43rem;
+  }
+  .btn_baixar{
+    font-family: 'Inter', sans-serif;
+    background-color: #110064;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: #ffff;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0rem 0 0 -13rem;
+  }
+  .btn_baixar:hover{
+    color: #2393f7;
+    border: 3px solid #2393f7;
+   }
+
+   .logo {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 130px;
+    height: 130px;
+}
+
+.back-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .back-button {
+    font-family: 'Inter', sans-serif;
+    padding: 10px 15px;
+    background-color: #110064; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .back-button:hover {
+    color: #2393f7;
+    border: 3px solid #2393f7;
+  }
+</style>
+</html>

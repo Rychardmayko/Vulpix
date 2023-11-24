@@ -1,0 +1,33 @@
+body { 
+    align-items: center;
+    padding: 150px;
+    background-color: #D9D9D9;
+    font-family: "Roboto";
+    
+}
+
+p {
+    line-height: 1.5;
+    font-size: 24px;
+}
+h1 { 
+    margin-top: 50px;
+    margin-left: 20px;
+    font-size: 36px;
+}
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 150px;
+    height: 150px;
+}
+.footer{
+    margin-top:  300px;
+    margin-left: 1200px;
+    padding: 0.5rem 0.5rem;
+}
+.contato{ 
+    padding: 0.5rem 0.5rem;
+
+}

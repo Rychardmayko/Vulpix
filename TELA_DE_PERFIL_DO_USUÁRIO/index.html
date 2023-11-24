@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="LOGO.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Perfil do Usuário</title>
+    
+</head>
+<body>
+    <img class="logo" src="LOGO.png" alt="VULPIX">
+    <div class="back-container">
+        <button class="back-button">VOLTAR</button>
+    </div>
+    <div id="profile-box">
+
+        <label for="username">Nome do Colaborador:</label>
+        <input type="text" id="username" value="José Carlos Lorandi" readonly>
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" value="3" readonly>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" value="123.456.789-00" readonly>
+
+        <label for="dob">Data de Nascimento:</label>
+        <input type="text" id="dob" value="06/02/1950" readonly>
+
+        <label for="hire-date">Data de Contratação:</label>
+        <input type="text" id="hire-date" value="01/01/2022" readonly>
+
+        <label for="address">Endereço:</label>
+        <input type="text" id="address" value="Rua Salame, 69">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" value="lorandi.carlos@vulpix.com">
+
+        <label for="phone">Telefone:</label>
+        <input type="tel" id="phone" value="(11) 98765-4321">
+
+        <button onclick="updateProfile()">Atualizar Perfil</button>
+        
+        <a href="Controle_de_Férias_VulPix.xlsx" download="./Controle_de_Férias_VulPix.xlsx" class="back-button">Acessar Férias</a> 
+
+        <div id="vacation-info"></div>
+    </div>
+
+    <script>
+        function updateProfile() {
+    // Adicione a lógica para enviar as informações atualizadas para o servidor
+    alert('Perfil atualizado com sucesso!');
+}
+
+function previewImage(input) {
+    var file = input.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('profile-img').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function calculateVacation() {
+    var hireDate = new Date(document.getElementById('hire-date').value);
+    var vacationDate = new Date(hireDate);
+    vacationDate.setFullYear(vacationDate.getFullYear() + 1);
+
+    var vacationInfo = document.getElementById('vacation-info');
+    vacationInfo.innerHTML = '<strong>Período de Férias:</strong> ' + formatDate(vacationDate);
+}
+
+function formatDate(date) {
+    var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+}
+
+// Chame a função ao carregar a página para exibir a informação de férias inicialmente
+calculateVacation();
+    </script>
+
+</body>
+
+<style>
+    body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #EDEDED;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 130px;
+    height: 130px;
+}
+
+.back-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .back-button {
+    font-family: 'Inter', sans-serif;
+    padding: 10px 15px;
+    background-color: #110064; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .back-button:hover {
+    color: #2393f7;
+    border: 3px solid #2393f7;
+    }
+
+#profile-box {
+    background-color: #ffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+input[readonly] {
+    background-color: #eee;
+}
+
+button {
+    font-family: 'Inter', sans-serif;
+    background-color: #110064;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #2393f7;
+    border: 3px solid #2393f7;
+}
+
+#profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 16px;
+}
+
+#upload-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 8px 16px;
+    background-color: #0c9fda;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#vacation-info {
+    margin-top: 20px;
+}
+</style>
+</html>

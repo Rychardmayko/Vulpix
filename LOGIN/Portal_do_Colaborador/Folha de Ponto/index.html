@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="LOGO.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Colaborador - Folha de Ponto</title>
+
+</head>
+<body>
+    <img class="logo" src="LOGO.png" alt="VULPIX">
+    <div class="back-container">
+        <button class="back-button">VOLTAR</button>
+    </div>
+    <div class="ponto-container">
+        <h1>Folha de Ponto</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Entrada</th>
+                    <th>Almoço</th>
+                    <th>Retorno</th>
+                    <th>Saída</th>
+                    <th>Horas Trabalhadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="date" id="date1"></td>
+                    <td><input type="time" id="startTime1"></td>
+                    <td><input type="time" id="startTime1"></td>
+                    <td><input type="time" id="startTime1"></td>
+                    <td><input type="time" id="endTime1"></td>
+                    <td><span id="totalHours1">0.00</span> horas</td>
+                </tr>
+                <tr>
+                    <td><input type="date" id="date2"></td>
+                    <td><input type="time" id="startTime2"></td>
+                    <td><input type="time" id="startTime2"></td>
+                    <td><input type="time" id="startTime2"></td>
+                    <td><input type="time" id="endTime2"></td>
+                    <td><span id="totalHours2">0.00</span> horas</td>
+                </tr>
+                <tr>
+                    <td><input type="date" id="date3"></td>
+                    <td><input type="time" id="startTime3"></td>
+                    <td><input type="time" id="startTime3"></td>
+                    <td><input type="time" id="startTime3"></td>
+                    <td><input type="time" id="endTime3"></td>
+                    <td><span id="totalHours3">0.00</span> horas</td>
+                </tr>
+                <tr>
+                    <td><input type="date" id="date4"></td>
+                    <td><input type="time" id="startTime4"></td>
+                    <td><input type="time" id="startTime4"></td>
+                    <td><input type="time" id="startTime4"></td>
+                    <td><input type="time" id="endTime4"></td>
+                    <td><span id="totalHours4">0.00</span> horas</td>
+                </tr>
+                <tr>
+                    <td><input type="date" id="date5"></td>
+                    <td><input type="time" id="startTime5"></td>
+                    <td><input type="time" id="startTime5"></td>
+                    <td><input type="time" id="startTime5"></td>
+                    <td><input type="time" id="endTime5"></td>
+                    <td><span id="totalHours5">0.00</span> horas</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="totalHours">Total de Horas Trabalhadas: <span id="totalWorkedHours">0.00</span> horas</div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
+

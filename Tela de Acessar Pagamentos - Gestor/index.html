@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="LOGO.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Gestor - Pagamento de Funcionários</title>
+</head>
+<body>
+  <img class="logo" src="LOGO.png" alt="VULPIX">
+  <div class="back-container">
+    <button class="back-button">VOLTAR</button>
+  </div>
+  <div id="payment-form">
+    <label for="month">Escolha o Mês:</label>
+    <select id="month">
+      <option value="jan">Janeiro</option>
+      <option value="feb">Fevereiro</option>
+      <option value="mar">Março</option>
+      <option value="mar">Abril</option>
+      <option value="mar">Maio</option>
+      <option value="mar">Junho</option>
+      <option value="mar">Julho</option>
+      <option value="mar">Agosto</option>
+      <option value="mar">Setembro</option>
+      <option value="mar">Outubro</option>
+      <option value="mar">Novembro</option>
+      <option value="mar">Dezembro</option>
+    </select>
+
+    <label for="search">Procurar por Nome ou ID:</label>
+    <input type="text" id="search" placeholder="Digite o nome ou ID">
+
+    <button onclick="getPayments()">OBTER PAGAMENTOS</button>
+
+    <table id="payment-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome do Funcionário</th>
+          <th>Salário Bruto</th>
+          <th>INSS</th>
+          <th>VT</th>
+          <th>Imposto de Renda</th>
+          <th>Assistência Médica</th>
+          <th>Salário Líquido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Os dados do pagamento dos funcionários serão exibidos aqui -->
+      </tbody>
+    </table>
+  </div>
+
+
+  <script>
+    function calculateInss(grossSalary) {
+  if (grossSalary <= 1100) {
+      return (grossSalary * 7.5) / 100;
+  } else if (grossSalary <= 2203.48) {
+      return (grossSalary * 9) / 100;
+  } else if (grossSalary <= 3305.22) {
+      return (grossSalary * 12) / 100;
+  } else if (grossSalary <= 6433.57) {
+      return (grossSalary * 14) / 100;
+  } else {
+      return 751.99; // Máximo de R$ 751.99 para salários acima de R$ 6433.57
+  }
+}
+
+function calculateIncomeTax(grossSalary, calculateInss) {
+  let baseSalary = grossSalary - calculateInss;
+
+  if (baseSalary <= 1903.98) {
+      return 0;
+  } else if (baseSalary <= 2826.65) {
+      return (baseSalary * 7.5) / 100 - 142.80;
+  } else if (baseSalary <= 3751.05) {
+      return (baseSalary * 15) / 100 - 354.80;
+  } else if (baseSalary <= 4664.68) {
+      return (baseSalary * 22.5) / 100 - 636.13;
+  } else {
+      return (baseSalary * 27.5) / 100 - 869.36;
+  }
+}
+
+function calculateNetSalary(grossSalary, calculateInss, medical) {
+  let incomeTax = calculateIncomeTax(grossSalary, calculateInss);
+  // Lógica para calcular o salário líquido
+  return grossSalary - calculateInss - medical - incomeTax;
+}
+
+function getPayments() {
+  // Lógica para obter os pagamentos do servidor
+
+  var month = document.getElementById('month').value;
+  var searchTerm = document.getElementById('search').value.toLowerCase();
+  var tableBody = document.getElementById('payment-table').getElementsByTagName('tbody')[0];
+
+  // Limpar a tabela antes de adicionar novos dados
+  tableBody.innerHTML = '';
+
+  var paymentData = [
+      { id: '1', name: 'Vinicius Santos', grossSalary: 5000, inss: 500, medical: 50, netSalary: 4050 },
+      { id: '2', name: 'Rychard Mayko', grossSalary: 4500, inss: 450, medical: 40, netSalary: 3760 },
+      { id: '3', name: 'José Lorandi', grossSalary: 6000, inss: 600, medical: 70, netSalary: 4810 },
+  ];
+
+  // Filtrar funcionários com base no termo de pesquisa
+  var filteredData = paymentData.filter(function (employee) {
+      return employee.name.toLowerCase().includes(searchTerm) || employee.id.includes(searchTerm);
+  });
+
+  // Preencher a tabela com os dados de pagamento filtrados
+  filteredData.forEach(function (employee) {
+      var row = tableBody.insertRow();
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+      var cell7 = row.insertCell(6);
+      var cell8 = row.insertCell(7);
+
+      var inss = calculateInss(employee.grossSalary);
+      var vt = employee.grossSalary * 0.06; // Calcula VT como 6% do salário bruto
+      var incomeTax = calculateIncomeTax(employee.grossSalary, inss);
+
+      // Calcula o salário líquido
+      netSalary = calculateNetSalary(employee.grossSalary, inss, employee.medical);
+
+      cell1.innerHTML = employee.id;
+      cell2.innerHTML = employee.name;
+      cell3.innerHTML = 'R$ ' + employee.grossSalary.toFixed(2);
+      cell4.innerHTML = 'R$ ' + inss.toFixed(2);
+      cell5.innerHTML = 'R$ ' + vt.toFixed(2);
+      cell6.innerHTML = 'R$ ' + incomeTax.toFixed(2);
+      cell7.innerHTML = 'R$ ' + employee.medical.toFixed(2);
+      cell8.innerHTML = 'R$ ' + netSalary.toFixed(2);
+  });
+}
+  </script>
+</body>
+
+
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #payment-form {
+    background-color: #EDEDED;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 650px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  select, input, button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+
+  button {
+    font-family: 'Inter', sans-serif;
+    background-color: #110064;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .button:hover {
+    box-shadow: 3px 7px 12px rgba(0,0,0,0.2)
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+
+  th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #110064;
+    color: #fff;
+  }
+
+  .logo {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 130px;
+    height: 130px;
+}
+
+.back-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.back-button {
+  font-family: 'Inter', sans-serif;
+  padding: 10px 15px;
+  background-color: #110064; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-button:hover {
+  box-shadow: 3px 7px 12px rgba(0,0,0,0.2)
+}
+</style>
+</html>
+

@@ -1,0 +1,80 @@
+body {
+    background-color: #EDEDED;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.ponto-container {
+    background-color: #ffff;
+    width: 700px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    font-family: 'roboto';
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #110064;
+    color: #fff;
+}
+
+#totalHours {
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 130px;
+    height: 130px;
+}
+
+.ponto-container h1 {
+    font-family: 'roboto';
+    text-align: center;
+}
+
+.back-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .back-button {
+    font-family: 'Inter', sans-serif;
+    padding: 10px 15px;
+    background-color: #110064;
+    color: #fff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+.back-button:hover {
+    color: #2393f7;
+    border: 3px solid #2393f7;
+}
